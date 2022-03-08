@@ -21,6 +21,7 @@ class MainSummary
 
     public function list()
     {
+        file_put_contents('test.txt', '1');
         if ($this->currentWeather->getWeather()->weather != null) {
             $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getText())->send();
             $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getFeelsLike())->send(true);
