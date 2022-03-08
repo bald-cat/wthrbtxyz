@@ -16,17 +16,15 @@ class Start
 
     const ROUTE = '/start';
 
-    public function __construct(Message $message, Request $request)
+    public function __construct(Message $message)
     {
         $this->message = $message;
         $this->answer = Lang::get('commands.start');
         //$this->chat_id = $request->input('chat_id');
-        file_put_contents('test.txt', '3');
     }
 
     public function start()
     {
-        file_put_contents('test.txt', '4');
         $this->message->setChatId('254096181')->setText($this->answer)->send();
     }
 

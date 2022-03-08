@@ -12,8 +12,9 @@ class Request
 
     public function __construct()
     {
-        $request = file_get_contents("http://input");
-        $this->request = json_decode($request, true);
+        $request = file_get_contents('php://input');
+        $request = json_decode($request, true);
+        $this->request = $request;
         $this->setInputMap();
     }
 

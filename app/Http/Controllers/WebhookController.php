@@ -9,17 +9,9 @@ use Illuminate\Support\Facades\Log;
 class WebhookController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-
-        file_put_contents('test.txt', '1');
-        if ($request->input('message') == Start::ROUTE) {
-            file_put_contents('test.txt', '2');
-            app('start')->start();
-        } else {
-            app('main-summary')->list();
-        }
-
+        app('start')->start();
     }
 
 }
