@@ -10,9 +10,10 @@ class Request
     protected array $request;
     protected array $map;
 
-    public function __construct(LaravelRequest $request)
+    public function __construct()
     {
-        $this->request = json_decode($request->getContent(), true);
+        $request = file_get_contents("http://input");
+        $this->request = json_decode($request, true);
         $this->setInputMap();
     }
 

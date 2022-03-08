@@ -12,9 +12,9 @@ class WebhookController extends Controller
     public function index(Request $request)
     {
 
-        Log::info('111');
+        file_put_contents('test.txt', '1');
         if ($request->input('message') == Start::ROUTE) {
-            Log::info('222');
+            file_put_contents('test.txt', '2');
             app('start')->start();
         } else {
             app('main-summary')->list();

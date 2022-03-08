@@ -20,14 +20,14 @@ class Start
     {
         $this->message = $message;
         $this->answer = Lang::get('commands.start');
-        $this->chat_id = $request->input('chat_id');
-        Log::info($request);
+        //$this->chat_id = $request->input('chat_id');
+        file_put_contents('test.txt', '3');
     }
 
     public function start()
     {
-        Log::info('1');
-        $this->message->setChatId($this->chat_id)->setText($this->answer)->send();
+        file_put_contents('test.txt', '4');
+        $this->message->setChatId('254096181')->setText($this->answer)->send();
     }
 
 }
