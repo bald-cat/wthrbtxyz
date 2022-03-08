@@ -22,3 +22,5 @@ Route::get('/', function () {
 
 Route::get('/set-webhook', [Webhook::class, 'setWebhook'])->name('set-webhook');
 Route::get('/webhook', [WebhookController::class, 'index'])->name('webhook');
+
+Route::get('test', [\App\Http\Controllers\TestController::class, 'test'])->name('test');
