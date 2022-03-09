@@ -31,8 +31,8 @@ class Request
         $this->map = [
             'chat_id' => $this->request['message']['chat']['id'],
             'message' => $this->request['message']['text'],
-            'username' => $this->request['message']['username'],
-            'language_code' => $this->request['message']['language_code']
+            'username' => $this->request['message']['from']['username'],
+            'language_code' => $this->request['message']['from']['language_code']
         ];
 
     }
