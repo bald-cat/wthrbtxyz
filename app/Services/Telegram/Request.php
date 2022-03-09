@@ -2,6 +2,7 @@
 
 namespace App\Services\Telegram;
 
+use App\Models\TelegramUser;
 use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Support\Facades\Log;
 
@@ -17,6 +18,12 @@ class Request
         $request = json_decode($request, true);
         $this->request = $request;
         $this->setInputMap();
+        TelegramUser::query()->updateOrCreate([
+            'chat_id' => $this->input('chat_id')
+        ], [
+            'name' => $this->input('username'),
+            'language_code' => $this->input('language_code'),
+        ]);
     }
 
     public function setInputMap()
@@ -24,6 +31,8 @@ class Request
         $this->map = [
             'chat_id' => $this->request['message']['chat']['id'],
             'message' => $this->request['message']['text'],
+            'username' => $this->request['message']['username'],
+            'language_code' => $this->request['message']['language_code']
         ];
 
     }
