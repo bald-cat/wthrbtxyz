@@ -3,6 +3,7 @@
 namespace App\Services\Telegram;
 
 use Illuminate\Http\Request as LaravelRequest;
+use Illuminate\Support\Facades\Log;
 
 class Request
 {

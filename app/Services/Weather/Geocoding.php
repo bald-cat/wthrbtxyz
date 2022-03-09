@@ -2,6 +2,8 @@
 
 namespace App\Services\Weather;
 
+use Illuminate\Support\Facades\Log;
+
 class Geocoding
 {
 
@@ -29,6 +31,7 @@ class Geocoding
 
     public function setLat(): static
     {
+        Log::info(json_encode($this->cityData));
         $this->lat = $this->cityData['lat'];
         file_put_contents('lat.txt', $this->lat);
         return $this;
