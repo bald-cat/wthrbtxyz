@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Orchid\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
