@@ -16,7 +16,6 @@ class WebhookController extends Controller
         if($request->input('message') == Start::ROUTE) {
             app('start')->start();
         } else {
-            Log::info(json_encode($request->input('message'), true));
             (new MainSummary($request->input('chat_id'), $request->input('message')))->list();
         }
     }

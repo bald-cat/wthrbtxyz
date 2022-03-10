@@ -29,6 +29,9 @@ class MainSummary
             $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getSunset())->send(true);
             $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getWindSpeed())->send(true);
             $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getWindDeg())->send(true);
+        } else {
+            $answer = Lang::get('info.not-find-city');
+            $this->message->setChatId($this->chat_id)->setText($answer)->send();
         }
     }
 
