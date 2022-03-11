@@ -25,8 +25,9 @@ class CityTable extends Table
     protected function columns(): iterable
     {
         return [
-            TD::make('name', 'Название'),
-            TD::make('count', 'Кол-во просмотров')
+            TD::make('id', '#')->align('left'),
+            TD::make('name', 'Название')->align('left'),
+            TD::make('count', 'Кол-во просмотров')->align('right')
         ];
     }
 }
