@@ -20,7 +20,7 @@ class City extends Screen
         $citiesCountSum = array_sum($citiesCount);
         return [
             'cities' => \App\Models\City::all(),
-            'cities_count' => $citiesCount,
+            'cities_count' => $citiesCountSum,
         ];
     }
 
@@ -52,11 +52,10 @@ class City extends Screen
     public function layout(): iterable
     {
         return [
-
-            Layout::blank([CityTable::class]),
             Layout::metrics([
                 'Общее кол-во запросов' => 'cities_count'
-            ])
+            ]),
+            Layout::blank([CityTable::class]),
 
         ];
     }
