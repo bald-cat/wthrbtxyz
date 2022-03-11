@@ -31,6 +31,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('telegram-users')
                 ->title('Навигация'),
 
+            Menu::make('Список городов')
+                ->icon('building')
+                ->route('cities'),
+
             Menu::make('Documentation')
                 ->title('Docs')
                 ->icon('docs')

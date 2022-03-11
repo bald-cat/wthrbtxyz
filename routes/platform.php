@@ -1,5 +1,7 @@
 <?php
 
+use App\Orchid\Layouts\CityTable;
+use App\Orchid\Screens\City;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -96,3 +98,4 @@ Route::screen('roles', RoleListScreen::class)
     });
 
 Route::screen('telegram-users', TelegramUser::class)->name('telegram-users');
+Route::screen('cities', City::class)->name('cities');
