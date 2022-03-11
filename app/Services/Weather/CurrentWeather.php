@@ -158,7 +158,7 @@ class CurrentWeather
             $windDeg = "{$windEmojis["south west"]}<i>Направление ветра:</i> Юго-Западный ($this->windDeg &#176;)";
         } elseif ($this->windDeg > 90 && $this->windDeg < 180) {
             $windDeg = "{$windEmojis["south east"]}<i>Направление ветра:</i> Юго-Восточный ($this->windDeg &#176;)";
-        } elseif ($this->windDeg > 90) {
+        } elseif ($this->windDeg < 90) {
             $windDeg = "{$windEmojis["north east"]}<i>Направление ветра:</i> Северо-Восточный ($this->windDeg &#176;)";
         }
 
