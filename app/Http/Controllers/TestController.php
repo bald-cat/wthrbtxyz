@@ -15,12 +15,10 @@ class TestController extends Controller
     {
 
         $replyMarkup = [
-            'reply_markup' => [
                 'keyboard' => [
                     'text' => 'Отправить местоположение',
                     'request_location' => true,
                 ],
-            ],
         ];
 
         var_dump($replyMarkup);
