@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens;
 
 use App\Orchid\Layouts\CityTable;
+use Illuminate\Support\Arr;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -15,8 +16,11 @@ class City extends Screen
      */
     public function query(): iterable
     {
+        $citiesCount = \App\Models\City::query()->select(['count'])->get()->toArray();
+        $citiesCountSum = array_sum($citiesCount);
         return [
             'cities' => \App\Models\City::all(),
+            'cities_count' => $citiesCount,
         ];
     }
 
@@ -49,7 +53,10 @@ class City extends Screen
     {
         return [
 
-            Layout::blank([CityTable::class])
+            Layout::blank([CityTable::class]),
+            Layout::metrics([
+                'Общее кол-во запросов' => 'cities_count'
+            ])
 
         ];
     }
