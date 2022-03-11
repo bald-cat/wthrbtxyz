@@ -14,16 +14,11 @@ class TestController extends Controller
     public function test()
     {
 
-        $replyMarkup = [
-            [
-                'keyboard' => [
-                    'keyboard_button' => [
-                        'text' => 'Отправить местоположение',
-                        'request_location' => true,
-                    ],
-                ],
-                ],
-        ];
+        $replyMarkup = array(
+            'keyboard' => array(
+                array("A", "B")
+            )
+        );
 
         TelegramRequest::request('sendMessage', [
             'chat_id' => "254096181",
