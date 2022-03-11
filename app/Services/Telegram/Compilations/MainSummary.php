@@ -32,6 +32,7 @@ class MainSummary
                 $this->message->setText($this->currentWeather->getWindDeg())->send(true);
             } else {
                 $answer = Lang::get('info.not-find-city');
+                $answer = "	\xE2\x9A\xA0 $answer";
                 $this->message->setText($answer)->send();
             }
     }
