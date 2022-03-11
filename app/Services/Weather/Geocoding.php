@@ -2,6 +2,7 @@
 
 namespace App\Services\Weather;
 
+use App\Models\City;
 use App\Services\Telegram\Message;
 use Illuminate\Support\Facades\Log;
 
@@ -22,6 +23,13 @@ class Geocoding
         $this->link = "http://api.openweathermap.org/geo/1.0/direct?q=" . $this->city. "&limit=" . $this->limit . "&appid=" . config('weather.token');
 
         $this->setCityData()->setLat()->setLon();
+
+        if($this->lon != null) {
+            $insertCity = City::query()->firstOrCreate(
+                ['name' => $city]
+            );
+            $insertCity->increment('count');
+        }
 
 
     }
