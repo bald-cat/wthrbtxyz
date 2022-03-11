@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Telegram\Message;
+use App\Services\Weather\CurrentWeather;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -10,8 +11,8 @@ class TestController extends Controller
 
     public function test()
     {
-        $message = new Message();
-        $message->setChatId('108872958')->setText("\xE2\x9D\xA4")->send();
+        $currentWeather = new CurrentWeather('Киев');
+        dd($currentWeather->getWeather());
     }
 
 }
