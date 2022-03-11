@@ -145,21 +145,21 @@ class CurrentWeather
 
         $windDeg = '';
         if ($this->windDeg == 360) {
-            $windDeg = "\xE2\xAC\x86 <i>Направление ветра:</i> Северный ($this->windDeg &#176;)";
+            $windDeg = "\xE2\xAC\x87 <i>Направление ветра:</i> Северный ($this->windDeg &#176;)";
         } elseif ($this->windDeg == 180) {
-            $windDeg = "\xE2\xAC\x87 <i>Направление ветра:</i> Южный ($this->windDeg &#176;)";
+            $windDeg = "\xE2\xAC\x86 <i>Направление ветра:</i> Южный ($this->windDeg &#176;)";
         } elseif ($this->windDeg == 90) {
-            $windDeg = "\xE2\x9E\xA1 <i>Направление ветра:</i> Восточный ($this->windDeg &#176;)";
+            $windDeg = "\xE2\xAC\x85 <i>Направление ветра:</i> Восточный ($this->windDeg &#176;)";
         } elseif ($this->windDeg == 270) {
-            $windDeg = "\xE2\xAC\x85 <i>Направление ветра:</i> Западный ($this->windDeg &#176;)";
+            $windDeg = "\xE2\x9E\xA1 <i>Направление ветра:</i> Западный ($this->windDeg &#176;)";
         } elseif ($this->windDeg > 270 && $this->windDeg < 360) {
-            $windDeg = "{$windEmojis["north west"]}<i>Направление ветра:</i> Северо-Западный ($this->windDeg &#176;)";
+            $windDeg = "{$windEmojis["south east"]}<i>Направление ветра:</i> Северо-Западный ($this->windDeg &#176;)";
         } elseif ($this->windDeg > 180 && $this->windDeg < 270) {
-            $windDeg = "{$windEmojis["south west"]}<i>Направление ветра:</i> Юго-Западный ($this->windDeg &#176;)";
+            $windDeg = "{$windEmojis["north east"]}<i>Направление ветра:</i> Юго-Западный ($this->windDeg &#176;)";
         } elseif ($this->windDeg > 90 && $this->windDeg < 180) {
-            $windDeg = "{$windEmojis["south east"]}<i>Направление ветра:</i> Юго-Восточный ($this->windDeg &#176;)";
+            $windDeg = "{$windEmojis["north west"]}<i>Направление ветра:</i> Юго-Восточный ($this->windDeg &#176;)";
         } elseif ($this->windDeg < 90) {
-            $windDeg = "{$windEmojis["north east"]}<i>Направление ветра:</i> Северо-Восточный ($this->windDeg &#176;)";
+            $windDeg = "{$windEmojis["south west"]}<i>Направление ветра:</i> Северо-Восточный ($this->windDeg &#176;)";
         }
 
         return $windDeg;
