@@ -21,7 +21,6 @@ class TestController extends Controller
                 ],
         ];
 
-        var_dump($replyMarkup);
         $keyboard = new Keyboard();
         $keyboard->setChatId('254096181')->setText('test')->setReplyMarkup(json_encode($replyMarkup))->send();
     }
