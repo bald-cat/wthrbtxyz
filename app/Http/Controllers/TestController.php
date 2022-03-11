@@ -21,8 +21,12 @@ class TestController extends Controller
                 ],
         ];
 
-        $keyboard = new Keyboard();
-        $keyboard->setChatId('254096181')->setText('test')->setReplyMarkup(json_encode($replyMarkup))->send();
+        TelegramRequest::request('sendMessage', [
+            'chat_id' => "254096181",
+            'text' => 'Отправить мою геолокацию',
+            'reply_markup' => json_encode($replyMarkup)
+        ]);
+
     }
 
 }
