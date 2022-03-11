@@ -19,7 +19,8 @@ class City extends Screen
     {
         return [
             'cities' => \App\Models\City::all(),
-            'cities_count' => DB::table('cities')->sum('count'),
+            'cities_sum_count' => DB::table('cities')->sum('count'),
+            'cities_count' => \App\Models\City::all()->count(),
         ];
     }
 
@@ -52,7 +53,8 @@ class City extends Screen
     {
         return [
             Layout::metrics([
-                'Общее кол-во запросов' => 'cities_count'
+                'Кол-во городов' => 'cities_count',
+                'Общее кол-во запросов' => 'cities_sum_count'
             ]),
             Layout::blank([CityTable::class]),
 
