@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Orchid\Layouts\CityTable;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
@@ -16,11 +17,9 @@ class City extends Screen
      */
     public function query(): iterable
     {
-        $citiesCount = \App\Models\City::query()->select(['count'])->get()->toArray();
-        $citiesCountSum = array_sum($citiesCount);
         return [
             'cities' => \App\Models\City::all(),
-            'cities_count' => $citiesCountSum,
+            'cities_count' => DB::table('cities')->sum('count'),
         ];
     }
 
