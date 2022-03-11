@@ -2,6 +2,7 @@
 
 namespace App\Services\Weather;
 
+use App\Services\Telegram\Message;
 use Illuminate\Support\Facades\Log;
 
 class Geocoding
@@ -11,15 +12,18 @@ class Geocoding
     protected int $limit;
     protected array $cityData;
     protected string $link;
-    protected string $lat;
-    protected string $lon;
+    protected $lat;
+    protected $lon;
 
     public function __construct($city)
     {
         $this->limit = 1;
         $this->city = $city;
         $this->link = "http://api.openweathermap.org/geo/1.0/direct?q=" . $this->city. "&limit=" . $this->limit . "&appid=" . config('weather.token');
+
         $this->setCityData()->setLat()->setLon();
+
+
     }
 
     private function setCityData(): static
@@ -31,25 +35,22 @@ class Geocoding
 
     public function setLat(): static
     {
-        Log::info(json_encode($this->cityData));
-        $this->lat = $this->cityData['lat'];
-        file_put_contents('lat.txt', $this->lat);
+        $this->lat = $this->cityData['lat']  ?? null;
         return $this;
     }
 
     public function setLon(): static
     {
-        $this->lon = $this->cityData['lon'];
-        file_put_contents('lon.txt', $this->cityData['lon']);
+        $this->lon = $this->cityData['lon'] ?? null;
         return $this;
     }
 
-    public function getLat(): string
+    public function getLat()
     {
         return $this->lat;
     }
 
-    public function getLon(): string
+    public function getLon()
     {
         return $this->lon;
     }

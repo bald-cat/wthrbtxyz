@@ -28,17 +28,23 @@ class CurrentWeather
     {
         $this->geo = new Geocoding($city);
         $this->setLon($this->geo->getLon())
-            ->setLat($this->geo->getLat())
-            ->setLink()
-            ->setWeather()
-            ->setTemp()
-            ->setDescription()
-            ->setFeelsLike()
-            ->setIcon()
-            ->setSunset()
-            ->setSunrise()
-            ->setWindDeg()
-            ->setWindSpeed();
+            ->setLat($this->geo->getLat());
+
+        if($this->lon != null){
+            $this->setLink()
+                ->setWeather()
+                ->setTemp()
+                ->setDescription()
+                ->setFeelsLike()
+                ->setIcon()
+                ->setSunset()
+                ->setSunrise()
+                ->setWindDeg()
+                ->setWindSpeed();
+        } else {
+            $this->weather = null;
+        }
+
     }
 
     public function setWeather(): static

@@ -13,11 +13,12 @@ class WebhookController extends Controller
 
     public function index(Request $request)
     {
-        if($request->input('message') == Start::ROUTE) {
-            app('start')->start();
-        } else {
-            (new MainSummary($request->input('chat_id'), $request->input('message')))->list();
-        }
+            if($request->input('message') == Start::ROUTE) {
+                app('start')->start();
+            } else {
+                (new MainSummary($request->input('chat_id'), $request->input('message')))->list();
+            }
+
     }
 
 }

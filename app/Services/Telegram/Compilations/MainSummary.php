@@ -18,18 +18,21 @@ class MainSummary
         $this->currentWeather = new CurrentWeather($city);
         $this->message = app('message');
         $this->chat_id = $chat_id;
+        $this->message->setChatId($this->chat_id);
     }
 
     public function list()
     {
-        if ($this->currentWeather->getWeather()->weather != null) {
-            $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getText())->send();
-            $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getFeelsLike())->send(true);
-            $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getSunrise())->send(true);
-            $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getSunset())->send(true);
-            $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getWindSpeed())->send(true);
-            $this->message->setChatId($this->chat_id)->setText($this->currentWeather->getWindDeg())->send(true);
-        }
+            if ($this->currentWeather->getWeather() != null) {
+                $this->message->setText($this->currentWeather->getText())->send();
+                $this->message->setText($this->currentWeather->getFeelsLike())->send(true);
+                $this->message->setText($this->currentWeather->getSunrise())->send(true);
+                $this->message->setText($this->currentWeather->getSunset())->send(true);
+                $this->message->setText($this->currentWeather->getWindSpeed())->send(true);
+                $this->message->setText($this->currentWeather->getWindDeg())->send(true);
+            } else {
+                $answer = Lang::get('info.not-find-city');
+                $this->message->setText($answer)->send();
+            }
     }
-
 }
