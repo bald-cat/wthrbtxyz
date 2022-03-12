@@ -11,9 +11,9 @@ class TimerController extends Controller
         $keyboard = [
             'keyboard' => [
                 [
-                    ['text' => 'В смятку'],
-                    ['text' => 'В мешочку'],
-                    ['text' => 'Вкрутую'],
+                    ['text' => 'всмятку'],
+                    ['text' => 'в мешочек'],
+                    ['text' => 'вкрутую'],
                 ],
             ],
             'resize_keyboard' => true,
