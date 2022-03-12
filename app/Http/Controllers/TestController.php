@@ -27,9 +27,14 @@ class TestController extends Controller
 
         TelegramRequest::request('sendMessage', [
             'chat_id' => "254096181",
-            'text' => '',
-            'reply_markup' => json_encode($replyMarkup)
+            'text' => "<b>Определение местоположения</b>\xF0\x9F\x8C\x8D",
+            'reply_markup' => json_encode($replyMarkup),
+            'parse_mode' => 'HTML',
         ]);
+
+        $text = "<b>Обновление!</b> Добавлена новая функция. Теперь можно получить погоду для вашего текущего местоположения просто выбрав в меню кнопку Отправить мою геолокацию. Также, можно просто прикрепить геолокацию, выбрав любую точку на карте и получить данные о погоде в этой точке.";
+        $message = new Message();
+        $message->setChatId('254096181')->setText($text)->send();
 
     }
 
