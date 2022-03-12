@@ -15,32 +15,27 @@ class TestController extends Controller
     public function test()
     {
 
-        $users = TelegramUser::all();
-        foreach ($users as $user){
-            $replyMarkup = [
-                'keyboard' => [
-                    [
+        $replyMarkup = [
+            'keyboard' => [
+                [
                         ['text' => "\xF0\x9F\x93\x8D Отправить мою геолокацию",
-                            'request_location' => true]
-                    ],
+                     'request_location' => true]
                 ],
-                'resize_keyboard' => true,
-                'input_field_placeholder' => 'Впишите название города или ...',
-            ];
+            ],
+            'resize_keyboard' => true,
+            'input_field_placeholder' => 'Впишите название города или ...',
+        ];
 
-            TelegramRequest::request('sendMessage', [
-                'chat_id' => "$user->chat_id",
-                'text' => "<b>Определение местоположения</b> \xF0\x9F\x8C\x8D",
-                'reply_markup' => json_encode($replyMarkup),
-                'parse_mode' => 'HTML',
-            ]);
+        TelegramRequest::request('sendMessage', [
+            'chat_id' => "254096181",
+            'text' => "<b>Определение местоположения</b> \xF0\x9F\x8C\x8D",
+            'reply_markup' => json_encode($replyMarkup),
+            'parse_mode' => 'HTML',
+        ]);
 
-            $text = "<b>Обновление!</b> Добавлена новая функция. Теперь можно получить погоду для вашего текущего местоположения просто выбрав в меню кнопку Отправить мою геолокацию. Также, можно просто прикрепить геолокацию, выбрав любую точку на карте и получить данные о погоде в этой точке.";
-            $message = new Message();
-            $message->setChatId($user->chat_id)->setText($text)->send();
-        }
-
-
+        $text = "<b>Обновление!</b> Добавлена новая функция. Теперь можно получить погоду для вашего текущего местоположения просто выбрав в меню кнопку Отправить мою геолокацию. Также, можно просто прикрепить геолокацию, выбрав любую точку на карте и получить данные о погоде в этой точке.";
+        $message = new Message();
+        $message->setChatId('254096181')->setText($text)->send();
 
     }
 
