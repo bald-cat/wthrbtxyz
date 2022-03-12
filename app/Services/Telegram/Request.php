@@ -33,8 +33,8 @@ class Request
             'message' => $this->request['message']['text'],
             'username' => $this->request['message']['from']['username'],
             'language_code' => $this->request['message']['from']['language_code'],
-            'longitude' => $this->request['location']['longitude'],
-            'latitude' => $this->request['location']['latitude'],
+            'longitude' => $this->request['location']['longitude'] ?? null,
+            'latitude' => $this->request['location']['latitude'] ?? null,
         ];
 
     }
