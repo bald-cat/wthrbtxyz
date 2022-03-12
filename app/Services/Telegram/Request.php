@@ -29,10 +29,10 @@ class Request
     public function setInputMap()
     {
         $this->map = [
-            'chat_id' => $this->request['message']['chat']['id'],
-            'message' => $this->request['message']['text'],
-            'username' => $this->request['message']['from']['username'],
-            'language_code' => $this->request['message']['from']['language_code'],
+            'chat_id' => $this->request['message']['chat']['id'] ?? null,
+            'message' => $this->request['message']['text'] ?? null,
+            'username' => $this->request['message']['from']['username'] ?? null,
+            'language_code' => $this->request['message']['from']['language_code'] ?? null,
             'longitude' => $this->request['location']['longitude'] ?? null,
             'latitude' => $this->request['location']['latitude'] ?? null,
         ];
