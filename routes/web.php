@@ -23,4 +23,6 @@ Route::get('/', function () {
 Route::get('/set-webhook', [Webhook::class, 'setWebhook'])->name('set-webhook');
 Route::post('/webhook', [WebhookController::class, 'index'])->name('webhook');
 
+Route::post('/timer', [\App\Http\Controllers\TimerController::class, 'index'])->name('timer');
+
 Route::get('test', [\App\Http\Controllers\TestController::class, 'test'])->name('test');
