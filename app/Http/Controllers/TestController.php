@@ -21,7 +21,6 @@ class TestController extends Controller
                      'request_location' => true]
                 ],
             'resize_keyboard' => true,
-            'input_field_placeholder' => 'тест',
             ]
         ];
 
