@@ -20,6 +20,14 @@ class TestController extends Controller
             )
         );
 
+        $replyMarkup = [
+            'keyboard' => [
+                [
+                    ['text' => 'Тест']
+                ]
+            ]
+        ];
+
         TelegramRequest::request('sendMessage', [
             'chat_id' => "254096181",
             'text' => 'Отправить мою геолокацию',
