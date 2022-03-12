@@ -22,12 +22,12 @@ class TestController extends Controller
                 ],
             ],
             'resize_keyboard' => true,
-            'input_field_placeholder' => 'Впишите название города или Отправьте свою геолокацию',
+            'input_field_placeholder' => 'Впишите название города или ...',
         ];
 
         TelegramRequest::request('sendMessage', [
             'chat_id' => "254096181",
-            'text' => 'Отправить мою геолокацию',
+            'text' => '',
             'reply_markup' => json_encode($replyMarkup)
         ]);
 
