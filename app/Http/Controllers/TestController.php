@@ -14,12 +14,6 @@ class TestController extends Controller
     public function test()
     {
 
-        $replyMarkup = array(
-            'keyboard' => array(
-                array("A", "B")
-            )
-        );
-
         $replyMarkup = [
             'keyboard' => [
                 [
@@ -27,7 +21,7 @@ class TestController extends Controller
                      'request_location' => true]
                 ],
             'resize_keyboard' => true,
-            'input_field_placeholder' => 'Введите название нужного города или Отправьте свое местоположение'
+            'input_field_placeholder' => 'тест',
             ]
         ];
 
