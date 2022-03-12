@@ -18,9 +18,9 @@ class WebhookController extends Controller
                 app('start')->start();
             } elseif ($request->input('latitude') != null && $request->input('longitude') != null) {
                 (new LocationSummary($request->input('chat_id'), $request->input('longitude'), $request->input('latitude')))->list();
-            } else {
+            } /*else {
                 (new MainSummary($request->input('chat_id'), $request->input('message')))->list();
-            }
+            }*/
 
     }
 
