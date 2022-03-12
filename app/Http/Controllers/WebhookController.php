@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\Telegram\Commands\Start;
 use App\Services\Telegram\Compilations\LocationSummary;
-use App\Services\Telegram\Compilations\MainSummary;
 use App\Services\Telegram\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -13,7 +12,7 @@ class WebhookController extends Controller
 
     public function index(Request $request)
     {
-        Log::info(json_encode($request));
+        Log::info(json_encode($request->input('longitude')));
             if($request->input('message') == Start::ROUTE) {
                 app('start')->start();
             } elseif ($request->input('latitude') != null && $request->input('longitude') != null) {
