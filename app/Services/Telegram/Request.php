@@ -17,6 +17,7 @@ class Request
         $request = file_get_contents('php://input');
         $request = json_decode($request, true);
         $this->request = $request;
+        Log::info(json_encode($this->request));
         $this->setInputMap();
         TelegramUser::query()->updateOrCreate([
             'chat_id' => $this->input('chat_id')
