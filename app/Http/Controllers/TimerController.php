@@ -34,7 +34,7 @@ class TimerController extends Controller
             $minutes = 3;
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
-                'text' => "Напомню через $minutes минут(у)",
+                'text' => "Напомню через $minutes минуты",
                 'parse_mode' => 'HTML',
             ]);
             sleep($minutes * 60);
