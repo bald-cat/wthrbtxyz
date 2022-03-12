@@ -23,7 +23,8 @@ class TestController extends Controller
         $replyMarkup = [
             'keyboard' => [
                 [
-                    ['text' => 'Отправить мою геолокацию',
+                    'keyboard_button' =>
+                        ['text' => 'Отправить мою геолокацию',
                      'request_location' => 'true']
                 ]
             ]
