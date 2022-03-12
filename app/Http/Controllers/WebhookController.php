@@ -15,6 +15,8 @@ class WebhookController extends Controller
     {
             if($request->input('message') == Start::ROUTE) {
                 app('start')->start();
+            } elseif ($request->input('longitude')) {
+                app('start')->start();
             } else {
                 (new MainSummary($request->input('chat_id'), $request->input('message')))->list();
             }
