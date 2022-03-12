@@ -71,6 +71,13 @@ class TimerController extends Controller
                 'text' => "Доставай яйца!",
                 'parse_mode' => 'HTML',
             ]);
+        } else {
+            $this->request('sendMessage', [
+                'chat_id' => $request['message']['chat']['id'],
+                'text' => 'Варишь яйца? Не прозевай время! Как хочешь сварить яйцо? Выберите с помощью клавиатуры',
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode($keyboard)
+            ]);
         }
 
     }
