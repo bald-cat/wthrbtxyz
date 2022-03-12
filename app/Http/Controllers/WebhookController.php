@@ -12,7 +12,7 @@ class WebhookController extends Controller
 
     public function index(Request $request)
     {
-        Log::info(json_encode($request));
+        Log::info(json_encode($request->input('latitude')));
             if($request->input('message') == Start::ROUTE) {
                 app('start')->start();
             } elseif ($request->input('latitude') != null && $request->input('longitude') != null) {
