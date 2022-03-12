@@ -22,7 +22,7 @@ class TestController extends Controller
                 ],
             ],
             'resize_keyboard' => true,
-            'input_field_placeholder' => 'тест',
+            'input_field_placeholder' => 'Впишите название города или Отправьте свою геолокацию',
         ];
 
         TelegramRequest::request('sendMessage', [
