@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\TelegramRequest;
-use App\Services\Telegram\Message;
-use App\Services\Telegram\Request;
-
 class TimerController extends Controller
 {
 
     public function index()
     {
+
+        $keyboard = [
+            'keyboard' => [
+                [
+                    ['всмятку', 'в мешочек', 'вкрутую']
+                ],
+            ],
+            'resize_keyboard' => true,
+            'input_field_placeholder' => 'Как сварить?',
+        ];
 
         $request = file_get_contents('php://input');
         $request = json_decode($request, true);
@@ -18,14 +24,41 @@ class TimerController extends Controller
         if ($request['message']['text'] == '/start') {
             $this->request('sendMessage', [
                     'chat_id' => $request['message']['chat']['id'],
-                    'text' => 'Привет! Через сколько секунд ответить тебе?',
+                    'text' => 'Варишь яйца? Не прозевай время! Как хочешь сварить яйцо? Выберите с помощью клавиатуры',
                     'parse_mode' => 'HTML',
+                    'reply_markup' => json_encode($keyboard)
             ]);
-        } else {
-            $minutes = $request['message']['text'];
+        } elseif($request['message']['text'] == 'всмятку') {
+            $minutes = 3;
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
-                'text' => "Напомню через $minutes секунд",
+                'text' => "Напомню через $minutes минут",
+                'parse_mode' => 'HTML',
+            ]);
+            sleep($minutes);
+            $this->request('sendMessage', [
+                'chat_id' => $request['message']['chat']['id'],
+                'text' => "Доставай яйца!",
+                'parse_mode' => 'HTML',
+            ]);
+        } elseif($request['message']['text'] == 'в мешочек') {
+            $minutes = 5;
+            $this->request('sendMessage', [
+                'chat_id' => $request['message']['chat']['id'],
+                'text' => "Напомню через $minutes минут",
+                'parse_mode' => 'HTML',
+            ]);
+            sleep($minutes);
+            $this->request('sendMessage', [
+                'chat_id' => $request['message']['chat']['id'],
+                'text' => "Доставай яйца!",
+                'parse_mode' => 'HTML',
+            ]);
+        } elseif($request['message']['text'] == 'вкрутую') {
+            $minutes = 9;
+            $this->request('sendMessage', [
+                'chat_id' => $request['message']['chat']['id'],
+                'text' => "Напомню через $minutes минут",
                 'parse_mode' => 'HTML',
             ]);
             //$seconds = $minutes * 60;
@@ -33,10 +66,11 @@ class TimerController extends Controller
             sleep($seconds);
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
-                'text' => "$seconds секунд прошло.",
+                'text' => "Доставай яйца!",
                 'parse_mode' => 'HTML',
             ]);
         }
+
     }
 
     /**
