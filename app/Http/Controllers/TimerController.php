@@ -26,7 +26,7 @@ class TimerController extends Controller
         if ($request['message']['text'] == '/start') {
             $this->request('sendMessage', [
                     'chat_id' => $request['message']['chat']['id'],
-                    'text' => 'Варишь яйца? Не прозевай время! Как хочешь сварить яйцо? Выберите с помощью клавиатуры',
+                    'text' => 'Варишь яйца? Не прозевай время! Как хочешь сварить яйцо? Выбери с помощью клавиатуры',
                     'parse_mode' => 'HTML',
                     'reply_markup' => json_encode($keyboard)
             ]);
@@ -34,10 +34,10 @@ class TimerController extends Controller
             $minutes = 3;
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
-                'text' => "Напомню через $minutes минут",
+                'text' => "Напомню через $minutes минут(у)",
                 'parse_mode' => 'HTML',
             ]);
-            sleep($minutes);
+            sleep($minutes * 60);
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
                 'text' => "Доставай яйца!",
@@ -50,7 +50,7 @@ class TimerController extends Controller
                 'text' => "Напомню через $minutes минут",
                 'parse_mode' => 'HTML',
             ]);
-            sleep($minutes);
+            sleep($minutes * 60);
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
                 'text' => "Доставай яйца!",
@@ -63,9 +63,7 @@ class TimerController extends Controller
                 'text' => "Напомню через $minutes минут",
                 'parse_mode' => 'HTML',
             ]);
-            //$seconds = $minutes * 60;
-            $seconds = $request['message']['text'];
-            sleep($seconds);
+            sleep($minutes * 60);
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
                 'text' => "Доставай яйца!",
@@ -74,7 +72,7 @@ class TimerController extends Controller
         } else {
             $this->request('sendMessage', [
                 'chat_id' => $request['message']['chat']['id'],
-                'text' => 'Варишь яйца? Не прозевай время! Как хочешь сварить яйцо? Выберите с помощью клавиатуры',
+                'text' => 'Варишь яйца? Не прозевай время! Как хочешь сварить яйцо? Выбери с помощью клавиатуры',
                 'parse_mode' => 'HTML',
                 'reply_markup' => json_encode($keyboard)
             ]);
