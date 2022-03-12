@@ -45,7 +45,7 @@
     </header>
 
     <main class="px-3">
-        <h1>Дратути, это погода:</h1>=5
+        <h1>Дратути, это погода:</h1>
         <p class="lead">Telegram-бот, который отправит вам текущую погоду</p>
         <p class="lead">
             <a href="https://t.me/baldcat_weather_bot" class="btn btn-lg btn-secondary">Перейти</a>
