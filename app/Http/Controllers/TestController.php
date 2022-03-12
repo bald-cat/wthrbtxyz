@@ -20,8 +20,9 @@ class TestController extends Controller
                         ['text' => "\xF0\x9F\x93\x8D Отправить мою геолокацию",
                      'request_location' => true]
                 ],
+            ],
             'resize_keyboard' => true,
-            ]
+            'input_field_placeholder' => 'тест',
         ];
 
         TelegramRequest::request('sendMessage', [
