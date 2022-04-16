@@ -25,12 +25,14 @@ class LocationSummary
     public function list()
     {
             if ($this->locationWeather->getWeather() != null) {
-                $this->message->setText($this->locationWeather->getText())->send();
-                $this->message->setText($this->locationWeather->getFeelsLike())->send(true);
-                $this->message->setText($this->locationWeather->getSunrise())->send(true);
-                $this->message->setText($this->locationWeather->getSunset())->send(true);
-                $this->message->setText($this->locationWeather->getWindSpeed())->send(true);
-                $this->message->setText($this->locationWeather->getWindDeg())->send(true);
+                $text = $this->locationWeather->getText() . PHP_EOL;
+                $text .= $this->locationWeather->getFeelsLike() . PHP_EOL;
+                $text .= $this->locationWeather->getSunrise() . PHP_EOL;
+                $text .= $this->locationWeather->getSunset() . PHP_EOL;
+                $text .= $this->locationWeather->getWindSpeed() . PHP_EOL;
+                $text .= $this->locationWeather->getWindDeg() . PHP_EOL;
+
+                $this->message->setText($text)->send();
             } else {
                 $answer = Lang::get('info.not-find-city');
                 $answer = "\xE2\x9A\xA0 $answer";
