@@ -22,7 +22,7 @@ class LocationSummary
         $this->message->setChatId($this->chat_id);
     }
 
-    public function list()
+    public function list(): void
     {
             if ($this->locationWeather->getWeather() != null) {
                 $text = $this->locationWeather->getText() . PHP_EOL;
