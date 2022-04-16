@@ -21,15 +21,16 @@ class MainSummary
         $this->message->setChatId($this->chat_id);
     }
 
-    public function list()
+    public function list(): void
     {
             if ($this->currentWeather->getWeather() != null) {
-                $this->message->setText($this->currentWeather->getText())->send();
-                $this->message->setText($this->currentWeather->getFeelsLike())->send(true);
-                $this->message->setText($this->currentWeather->getSunrise())->send(true);
-                $this->message->setText($this->currentWeather->getSunset())->send(true);
-                $this->message->setText($this->currentWeather->getWindSpeed())->send(true);
-                $this->message->setText($this->currentWeather->getWindDeg())->send(true);
+                $text = $this->currentWeather->getText() . PHP_EOL;
+                $text .= $this->currentWeather->getFeelsLike() . PHP_EOL;
+                $text .= $this->currentWeather->getSunrise() . PHP_EOL;
+                $text .= $this->currentWeather->getSunset() . PHP_EOL;
+                $text .= $this->currentWeather->getWindSpeed() . PHP_EOL;
+                $text .= $this->currentWeather->getWindDeg() . PHP_EOL;
+                $this->message->setText($text)->send();
             } else {
                 $answer = Lang::get('info.not-find-city');
                 $answer = "\xE2\x9A\xA0 $answer";
