@@ -2,12 +2,17 @@
 
 namespace App\Orchid\Screens;
 
-use App\Models\User;
+use App\Facades\TelegramMessage;
+use App\Models\TelegramUser;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\CheckBox;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
 class Newsletter extends Screen
@@ -40,12 +45,12 @@ class Newsletter extends Screen
     /**
      * Button commands.
      *
-     * @return \Orchid\Screen\Action[]
+     * @return Action[]
      */
     public function commandBar(): iterable
     {
         return [
-            Button::make('Send Message')
+            Button::make('Отправить уведомления')
                 ->icon('paper-plane')
                 ->method('sendNotification')
         ];
@@ -55,22 +60,27 @@ class Newsletter extends Screen
      * Views.
      *
      * @return iterable
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function layout(): iterable
     {
         return [
             Layout::rows([
-                Relation::make('users.')
+                Select::make('users.')
                     ->title('Получатель')
                     ->multiple()
-                    ->required()
                     ->placeholder('Имя пользователя')
                     ->help('В этом поле выбирается пользователь, которому будет отправлено сообщение')
-                    ->fromModel(TelegramUser::class,'name','chat_id'),
+                    ->fromModel(TelegramUser::class, 'name', 'chat_id'),
+
+                CheckBox::make('all')
+                ->title('Все пользователи')
+                ->help('Уведомления будут разосланы всем пользователям'),
+
                 TextArea::make('text')
                     ->title('Текст уведомления')
-                    ->help("*жирный* _курсив_ __подчеркнутый__ ~зачеркнутый~ ||спойлер||")
+                    ->required()
+                    ->help("Можно использовать html теги")
                     ->rows(5),
             ])
         ];
@@ -79,11 +89,16 @@ class Newsletter extends Screen
     public function sendNotification(Request $request)
     {
         $request->validate([
-            'users' => 'required',
             'text' => 'required|string',
         ]);
 
+        $usersChatId = $request->input('all') ? TelegramUser::pluck('chat_id')->all() : $request->input('users');
 
+        foreach ($usersChatId as $userChatId) {
+            TelegramMessage::setChatId($userChatId)->setText($request->input('text'))->send();
+        }
+
+        Alert::info('Уведомления пользователям были успешно разосланы');
 
     }
 
