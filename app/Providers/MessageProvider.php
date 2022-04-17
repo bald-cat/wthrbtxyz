@@ -2,12 +2,10 @@
 
 namespace App\Providers;
 
-use App\Services\Telegram\Commands\Start;
-use App\Services\Telegram\Compilations\MainSummary;
 use App\Services\Telegram\Message;
 use Illuminate\Support\ServiceProvider;
 
-class TelegramProvider extends ServiceProvider
+class MessageProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -16,9 +14,9 @@ class TelegramProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('start', Start::class);
-
-        $this->app->singleton('main-summary', MainSummary::class);
+        $this->app->bind('message', function () {
+            return new Message();
+        });
     }
 
     /**

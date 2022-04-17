@@ -186,6 +186,9 @@ return [
          * Weather service provider
          */
         \App\Providers\WeatherProvider::class,
+
+        \App\Providers\MessageProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
@@ -200,7 +203,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'message' => \App\Facades\TelegramMessage::class,
     ])->toArray(),
 
 ];

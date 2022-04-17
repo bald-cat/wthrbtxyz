@@ -9,6 +9,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Newsletter;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -99,3 +100,4 @@ Route::screen('roles', RoleListScreen::class)
 
 Route::screen('telegram-users', TelegramUser::class)->name('telegram-users');
 Route::screen('cities', City::class)->name('cities');
+Route::screen('newsletter', Newsletter::class)->name('newsletter');
