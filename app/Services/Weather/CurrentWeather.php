@@ -118,7 +118,7 @@ class CurrentWeather
         return "\xF0\x9F\x8C\x85 <i>Время рассвета:</i> $time (Киев)";
     }
 
-    public function setWindSpeed()
+    public function setWindSpeed(): void
     {
         $this->windSpeed = $this->weather->wind->speed;
     }
@@ -188,7 +188,7 @@ class CurrentWeather
         return "\xE2\x81\x89 Ощущается как <b>$this->feelsLike</b> &#8451;";
     }
 
-    public function setIcon()
+    public function setIcon(): static
     {
         $this->icon = $this->weather->weather[0]->icon;
         return $this;

@@ -77,7 +77,7 @@ class LocationWeather
 
     public function setTemp(): static
     {
-        $this->temp = $this->weather->main->temp;
+        $this->temp = floor($this->weather->main->temp);
         return $this;
     }
 
@@ -177,7 +177,7 @@ class LocationWeather
 
     public function setFeelsLike(): static
     {
-        $this->feelsLike = "{$this->weather->main->feels_like}";
+        $this->feelsLike = floor($this->weather->main->feels_like);
         return $this;
     }
 
