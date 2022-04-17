@@ -188,7 +188,7 @@ return [
         \App\Providers\WeatherProvider::class,
 
         \App\Providers\MessageProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*
