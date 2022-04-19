@@ -11,6 +11,7 @@ class SevenDaysWeather
     protected $lon;
     protected $link;
     public $weather;
+    private array $digest;
 
     public function __construct($city)
     {
@@ -20,7 +21,8 @@ class SevenDaysWeather
 
         if ($this->lon != null) {
             $this->setLink()
-                ->setWeather();
+                ->setWeather()
+                ->setDigest();
         }
     }
 
@@ -55,11 +57,17 @@ class SevenDaysWeather
         return $this;
     }
 
-    public function test()
+    protected function setDigest(): static
     {
-        $arr = $this->getWeather();
-        $test = new DayWeatherShaper($arr[0]);
-        dd($test->getText());
+        foreach ($this->weather as $day) {
+            $this->digest[] = (new DayWeatherShaper($day))->getText();
+        }
+        return $this;
+    }
+
+    public function getDigest(): array
+    {
+        return $this->digest;
     }
 
 
