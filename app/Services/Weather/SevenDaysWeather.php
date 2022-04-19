@@ -12,6 +12,7 @@ class SevenDaysWeather
     protected $link;
     public $weather;
     private array $digest;
+    private string $text = '';
 
     public function __construct($city)
     {
@@ -65,9 +66,14 @@ class SevenDaysWeather
         return $this;
     }
 
-    public function getDigest(): array
+
+    public function getDigest(): string
     {
-        return $this->digest;
+        foreach ($this->digest as $day) {
+            $this->text .= $day;
+        }
+
+        return $this->text;
     }
 
 

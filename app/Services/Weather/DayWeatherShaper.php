@@ -18,8 +18,9 @@ class DayWeatherShaper
     private $windDeg;
     private $feelsLike;
     private $text;
+    private $cels = "&#8451;";
 
-    const CELSIUM = "&#8451;";
+    const CELSIUS = "&#8451;";
 
     public function __construct($dailyWeather)
     {
@@ -48,12 +49,12 @@ class DayWeatherShaper
     public function setTemp(): static
     {
         $this->temp = [
-            'max' => $this->dailyWeather->temp->max,
-            'min' => $this->dailyWeather->temp->min,
-            'morning' => $this->dailyWeather->temp->morn,
-            'day' => $this->dailyWeather->temp->day,
-            'evening' => $this->dailyWeather->temp->eve,
-            'night' => $this->dailyWeather->temp->night,
+            'max' => ceil($this->dailyWeather->temp->max),
+            'min' => ceil($this->dailyWeather->temp->min),
+            'morning' => ceil($this->dailyWeather->temp->morn),
+            'day' => ceil($this->dailyWeather->temp->day),
+            'evening' => ceil($this->dailyWeather->temp->eve),
+            'night' => ceil($this->dailyWeather->temp->night),
         ];
         return $this;
     }
@@ -99,10 +100,10 @@ class DayWeatherShaper
     public function setFeelsLike()
     {
         $this->feelsLike = [
-            'morning' => $this->dailyWeather->feels_like->morn,
-            'day' => $this->dailyWeather->feels_like->day,
-            'evening' => $this->dailyWeather->feels_like->eve,
-            'night' => $this->dailyWeather->feels_like->night,
+            'morning' => ceil($this->dailyWeather->feels_like->morn),
+            'day' => ceil($this->dailyWeather->feels_like->day),
+            'evening' => ceil($this->dailyWeather->feels_like->eve),
+            'night' => ceil($this->dailyWeather->feels_like->night),
         ];
         return $this;
     }
@@ -112,14 +113,14 @@ class DayWeatherShaper
         $this->text = "<b>$this->day</b>" . PHP_EOL;
         $this->text .= PHP_EOL;
 
-        $this->text .= 'Максимальная температура: ' . $this->temp['max'] . PHP_EOL;
-        $this->text .= 'Минимальная температура: ' . $this->temp['min'] . PHP_EOL;
+        $this->text .= 'Максимальная температура: ' . $this->temp['max'] . $this->cels .  PHP_EOL;
+        $this->text .= 'Минимальная температура: ' . $this->temp['min'] . $this->cels .PHP_EOL;
         $this->text .= PHP_EOL;
 
-        $this->text .= 'Утром: ' . $this->temp['morning'] . PHP_EOL;
-        $this->text .= 'Днем: ' . $this->temp['day'] . PHP_EOL;
-        $this->text .= 'Вечером: ' . $this->temp['evening'] . PHP_EOL;
-        $this->text .= 'Ночью: ' . $this->temp['night'] . PHP_EOL;
+        $this->text .= 'Утром: ' . $this->temp['morning'] . $this->cels . PHP_EOL;
+        $this->text .= 'Днем: ' . $this->temp['day'] . $this->cels . PHP_EOL;
+        $this->text .= 'Вечером: ' . $this->temp['evening'] . $this->cels . PHP_EOL;
+        $this->text .= 'Ночью: ' . $this->temp['night'] . $this->cels . PHP_EOL;
         $this->text .= PHP_EOL;
     }
 
