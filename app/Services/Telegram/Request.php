@@ -20,7 +20,7 @@ class Request
         Log::info(json_encode($this->request));
 
         $this->setInputMap();
-        if ($this->input('chat_id')) {
+        if ($this->input('chat_id') != null) {
             TelegramUser::query()->updateOrCreate([
                 'chat_id' => $this->input('chat_id')
             ], [
