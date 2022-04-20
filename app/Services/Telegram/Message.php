@@ -37,7 +37,7 @@ class Message
 
             $weekButton = [
                 'text' => 'Получить погоду на неделю',
-                'callback_query' => 'Киев',
+                'callback_data' => 'Киев',
             ];
 
             $inlineKeyboard = [[$weekButton]];
