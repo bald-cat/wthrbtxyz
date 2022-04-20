@@ -2,6 +2,7 @@
 
 namespace App\Services\Weather;
 
+use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 
@@ -38,11 +39,7 @@ class DayWeatherShaper
 
     public function setDay()
     {
-        $sunset = new DateTime();
-        $sunset->setTimestamp($this->dailyWeather->dt);
-        $sunset->setTimezone(new DateTimeZone('Europe/Kiev'));
-        $time = $sunset->format('d.m.y');
-        $this->day = $time;
+        $this->day = $this->dailyWeather->dt;
         return $this;
     }
 
@@ -110,18 +107,31 @@ class DayWeatherShaper
 
     protected function setText()
     {
-        $this->text = "<b>$this->day</b>" . PHP_EOL;
+
+        $time = new Carbon($this->day, 'Europe/Kiev');
+
+        $months = config('months');
+        $monthNumber = $time->month;
+        $month = $months[$monthNumber];
+
+        $this->text = config('emojis.pin') . " <b>$time->day $month ($time->dayName)</b> - " . $this->description . PHP_EOL;
         $this->text .= PHP_EOL;
 
-        $this->text .= 'Максимальная температура: ' . $this->temp['max'] . $this->cels .  PHP_EOL;
-        $this->text .= 'Минимальная температура: ' . $this->temp['min'] . $this->cels .PHP_EOL;
+        $this->text .= config('emojis.time.morning') . 'Утром: ' . $this->temp['morning'] . $this->cels . PHP_EOL;
+        $this->text .= config('emojis.time.day') . 'Днем: ' . $this->temp['day'] . $this->cels . PHP_EOL;
+        $this->text .= config('emojis.time.evening') . 'Вечером: ' . $this->temp['evening'] . $this->cels . PHP_EOL;
+        $this->text .= config('emojis.time.night') . 'Ночью: ' . $this->temp['night'] . $this->cels . PHP_EOL;
         $this->text .= PHP_EOL;
 
-        $this->text .= 'Утром: ' . $this->temp['morning'] . $this->cels . PHP_EOL;
-        $this->text .= 'Днем: ' . $this->temp['day'] . $this->cels . PHP_EOL;
-        $this->text .= 'Вечером: ' . $this->temp['evening'] . $this->cels . PHP_EOL;
-        $this->text .= 'Ночью: ' . $this->temp['night'] . $this->cels . PHP_EOL;
+        $this->text .= config('emojis.sunrise') . 'Время рассвета ' . ' ' . $this->sunrise . PHP_EOL;
+        $this->text .= config('emojis.sunset') . 'Время заката ' . ' ' . $this->sunset . PHP_EOL;
         $this->text .= PHP_EOL;
+
+        $this->text .= config('emojis.wind-speed') . 'Скорость ветра: ' . ' ' . $this->windSpeed . ' м/с'. PHP_EOL;
+        $this->text .= (new WindDegree())->setDeg($this->windDeg)->getDeg() . PHP_EOL;
+        $this->text .= '____________________' . PHP_EOL;
+        $this->text .= PHP_EOL;
+
     }
 
     public function getText()
