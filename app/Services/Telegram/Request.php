@@ -18,13 +18,16 @@ class Request
         $request = json_decode($request, true);
         $this->request = $request['callback_query'];
         Log::info(json_encode($this->request));
+
         $this->setInputMap();
-        TelegramUser::query()->updateOrCreate([
-            'chat_id' => $this->input('chat_id')
-        ], [
-            'name' => $this->input('username'),
-            'language_code' => $this->input('language_code'),
-        ]);
+        if ($this->input('chat_id')) {
+            TelegramUser::query()->updateOrCreate([
+                'chat_id' => $this->input('chat_id')
+            ], [
+                'name' => $this->input('username'),
+                'language_code' => $this->input('language_code'),
+            ]);
+        }
     }
 
     public function setInputMap()
