@@ -13,11 +13,12 @@ class WebhookController extends Controller
 
     public function index(Request $request)
     {
-        Log::info(json_encode($request->input('latitude')));
             if($request->input('message') == Start::ROUTE) {
                 app('start')->start();
             } elseif ($request->input('latitude') != null && $request->input('longitude') != null) {
                 (new LocationSummary($request->input('chat_id'), $request->input('longitude'), $request->input('latitude')))->list();
+            } elseif ($request->input('callback_data')) {
+                app('start')->start();
             } else {
                 (new MainSummary($request->input('chat_id'), $request->input('message')))->list();
             }
