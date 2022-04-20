@@ -9,6 +9,7 @@ class Message
 
     private string $chat_id;
     private string $text;
+    private string $city;
 
     const METHOD = 'sendMessage';
 
@@ -21,6 +22,12 @@ class Message
     public function setText($text): static
     {
         $this->text = $text;
+        return $this;
+    }
+
+    public function setCity($city)
+    {
+        $this->city = $city;
         return $this;
     }
 
@@ -37,7 +44,7 @@ class Message
 
             $weekButton = [
                 'text' => 'Получить погоду на неделю',
-                'callback_data' => 'Киев',
+                'callback_data' => $this->city,
             ];
 
             $inlineKeyboard = [[$weekButton]];

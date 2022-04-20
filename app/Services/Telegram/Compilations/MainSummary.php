@@ -13,10 +13,12 @@ class MainSummary
     protected CurrentWeather $currentWeather;
     protected Message $message;
     protected string $chat_id;
+    protected $city;
 
     public function __construct($chat_id, $city)
     {
-        $this->currentWeather = new CurrentWeather($city);
+        $this->city = $city;
+        $this->currentWeather = new CurrentWeather($this->city);
         $this->message = app('message');
         $this->chat_id = $chat_id;
         $this->message->setChatId($this->chat_id);
@@ -31,7 +33,7 @@ class MainSummary
                 $text .= $this->currentWeather->getSunset() . PHP_EOL;
                 $text .= $this->currentWeather->getWindSpeed() . PHP_EOL;
                 $text .= $this->currentWeather->getWindDeg() . PHP_EOL;
-                TelegramMessage::setChatId($this->chat_id)->setText($text)->send();
+                TelegramMessage::setChatId($this->chat_id)->setText($text)->setCity($this->city)->send(true);
             } else {
                 $answer = Lang::get('info.not-find-city');
                 $answer = "\xE2\x9A\xA0 $answer";

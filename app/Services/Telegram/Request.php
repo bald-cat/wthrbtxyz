@@ -4,6 +4,7 @@ namespace App\Services\Telegram;
 
 use App\Models\TelegramUser;
 use Illuminate\Http\Request as LaravelRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class Request
@@ -16,8 +17,7 @@ class Request
     {
         $request = file_get_contents('php://input');
         $request = json_decode($request, true);
-        $this->request = $request['callback_query'];
-        Log::info(json_encode($this->request));
+        $this->request = $request;
 
         $this->setInputMap();
         if ($this->input('chat_id') != null) {
@@ -39,6 +39,8 @@ class Request
             'language_code' => $this->request['message']['from']['language_code'] ?? 'NOT DATA',
             'longitude' => $this->request['message']['location']['longitude'] ?? null,
             'latitude' => $this->request['message']['location']['latitude'] ?? null,
+            'callback_data' => $this->request['callback_query']['data'] ?? null,
+            'callback_id' => $this->request['callback_query']['from']['id'] ?? null,
         ];
 
     }
