@@ -16,7 +16,7 @@ class Request
     {
         $request = file_get_contents('php://input');
         $request = json_decode($request, true);
-        $this->request = $request->callback_query;
+        $this->request = $request['callback_query'];
         Log::info(json_encode($this->request));
         $this->setInputMap();
         TelegramUser::query()->updateOrCreate([
