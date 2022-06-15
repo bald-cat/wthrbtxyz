@@ -15,5 +15,6 @@ class TelegramUser extends Model
         'language_code',
         'name',
         'last_request_at',
+        'request_count'
     ];
 }

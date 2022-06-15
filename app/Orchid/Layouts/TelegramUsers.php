@@ -32,6 +32,7 @@ class TelegramUsers extends Table
             TD::make('language_code', 'Язык приложения'),
             TD::make('created_at', 'Добавлен'),
             TD::make('last_request_at', 'Последний запрос'),
+            TD::make('last_request_at', 'Кол-во запросов'),
         ];
     }
 }
