@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('telegram_users', function (Blueprint $table) {
-            $table->integer('request_count')->default(1);
+            $table->integer('request_count')->default(0);
         });
     }
 
