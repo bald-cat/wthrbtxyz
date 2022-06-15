@@ -3,6 +3,7 @@
 namespace App\Services\Telegram;
 
 use App\Models\TelegramUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -23,12 +24,16 @@ class Request
 
         $this->setInputMap();
         if ($this->input('chat_id') != null) {
-            TelegramUser::query()->updateOrCreate([
+            $user = TelegramUser::query()->updateOrCreate([
                 'chat_id' => $this->input('chat_id')
             ], [
                 'name' => $this->input('username') ?? $this->input('first_name') . ' ' . $this->input('last_name'),
                 'language_code' => $this->input('language_code'),
             ]);
+
+            $user->last_request_at = Carbon::now();
+            $user->save();
+
         }
     }
 

@@ -19,7 +19,7 @@ class TelegramUser extends Screen
     {
         return [
            'users_count' => \App\Models\TelegramUser::query()->count(),
-            'telegram_users' => \App\Models\TelegramUser::all(),
+            'telegram_users' => \App\Models\TelegramUser::all()->sortByDesc('last_request_at'),
         ];
     }
 
