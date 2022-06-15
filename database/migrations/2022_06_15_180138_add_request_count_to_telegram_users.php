@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('telegram_users', function (Blueprint $table) {
-            $table->integer('request_count')->nullable();
+            $table->integer('request_count')->default(1);
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('telegram_users', function (Blueprint $table) {
-            //
+            $table->dropColumn('request_count');
         });
     }
 };

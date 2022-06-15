@@ -20,8 +20,6 @@ class Request
         $request = json_decode($request, true);
         $this->request = $request;
 
-        Cache::set('test', $this->request);
-
         $this->setInputMap();
         if ($this->input('chat_id') != null) {
             $user = TelegramUser::query()->updateOrCreate([
@@ -29,13 +27,9 @@ class Request
             ], [
                 'name' => $this->input('username') ?? $this->input('first_name') . ' ' . $this->input('last_name'),
                 'language_code' => $this->input('language_code'),
+                'last_request_at' => Carbon::now()
             ]);
-
-            $user->last_request_at = Carbon::now();
-            $user->save();
-
             $user->increment('request_count');
-
         }
     }
 
