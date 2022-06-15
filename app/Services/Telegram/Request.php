@@ -32,6 +32,7 @@ class Request
             ]);
 
             $user->last_request_at = Carbon::now();
+            $user->increment('request_count');
             $user->save();
 
         }
